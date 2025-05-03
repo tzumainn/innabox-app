@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './Home';
-import Clusters from './Clusters';
-import BareMetal from './BareMetal';
+import Home from './pages/Home';
+import Clusters from './pages/Clusters';
+import BareMetal from './pages/BareMetal';
 
 export default function App() {
     return (
