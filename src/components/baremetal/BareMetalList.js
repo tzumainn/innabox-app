@@ -7,7 +7,7 @@ function BareMetalList() {
   useEffect(() => {
     const fetchBareMetalData = async () => {
 	try {
-            const response = await fetch('http://localhost:8081/api/v1/nodes/list');
+            const response = await fetch(process.env.REACT_APP_ESI_API_URL + '/api/v1/nodes/list');
             const result = await response.json();
             setBareMetalData(result);
             setBareMetalLoading(false);

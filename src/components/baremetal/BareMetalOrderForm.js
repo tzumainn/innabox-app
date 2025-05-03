@@ -7,7 +7,7 @@ function BareMetalOrderForm() {
   useEffect(() => {
       const fetchOfferData = async () => {
 	  try {
-              const response = await fetch('http://localhost:8081/api/v1/offers/list');
+              const response = await fetch(process.env.REACT_APP_ESI_API_URL + '/api/v1/offers/list');
               const result = await response.json();
               setOfferData(result);
               setOfferLoading(false);
@@ -29,7 +29,7 @@ function BareMetalOrderForm() {
   useEffect(() => {
       const fetchNetworkData = async () => {
 	  try {
-              const response = await fetch('http://localhost:8081/api/v1/networks/list');
+              const response = await fetch(process.env.REACT_APP_ESI_API_URL + '/api/v1/networks/list');
               const result = await response.json();
               setNetworkData(result);
               setNetworkLoading(false);
@@ -54,7 +54,7 @@ function BareMetalOrderForm() {
 	    nodes: Array.from(nodes).map((node) => ({resource_class: node[0], number: parseInt(node[1], 10)}))
 	};
 	try {
-	    fetch('http://localhost:8081/api/v1/baremetal-order/fulfill', {
+	    fetch(process.env.REACT_APP_ESI_API_URL + '/api/v1/baremetal-order/fulfill', {
 		method: "POST",
 		headers: {
 		    "Content-Type": "application/json",
