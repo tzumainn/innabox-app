@@ -46,6 +46,53 @@ function BareMetal() {
       return () => clearInterval(offerIntervalId)
   }, []);
 
+  const [networkData, setNetworkData] = useState([]);
+  const [networkLoading, setNetworkLoading] = useState(true);
+
+  useEffect(() => {
+      const fetchNetworkData = async () => {
+	  try {
+              const response = await fetch('http://localhost:8081/api/v1/networks/list');
+              const result = await response.json();
+              setNetworkData(result);
+              setNetworkLoading(false);
+	  } catch (error) {
+              console.error('Error fetching network data:', error);
+	      setNetworkLoading(false);
+	  }
+      };
+
+      fetchNetworkData();
+  }, []);
+
+    const [networkId, setNetworkId] = useState("");
+    const [nodes, setNodes] = useState(new Map());
+
+    const [fulfillWorking, setFulfillWorking] = useState(false);
+    const handleBareMetalOrderFulfillSubmit = (event) => {
+	event.preventDefault();
+	const bareMetalOrderInfo = {
+	    order_id: "1",
+	    network_id: networkId,
+	    nodes: Array.from(nodes).map((node) => ({resource_class: node[0], number: parseInt(node[1], 10)}))
+	};
+	try {
+	    fetch('http://localhost:8081/api/v1/baremetal-order/fulfill', {
+		method: "POST",
+		headers: {
+		    "Content-Type": "application/json",
+		},
+		body: JSON.stringify(bareMetalOrderInfo),
+	    })
+            setFulfillWorking(true);
+	    setTimeout(() => {
+		setFulfillWorking(false);
+	    }, 120000);
+	  } catch (error) {
+              console.error('Error creating bare metal order:', error);
+	  }
+    };
+    
     return (
 	<div>
 	    <Navigation />
@@ -60,15 +107,17 @@ function BareMetal() {
 		      <th>Resource Class</th>
 		      <th>Provision State</th>
 		      <th>Power State</th>
+		      <th>Network Info</th>
 		  </tr>
 	      </thead>
 	      <tbody>
-              {bareMetalData.map((item) => (
+              {bareMetalData.map((bareMetal) => (
 		  <tr>
-		      <td>{item.node.name}</td>
-		      <td>{item.node.resource_class}</td>
-		      <td>{item.node.provision_state}</td>
-		      <td>{item.node.power_state}</td>		      
+		      <td>{bareMetal.node.name}</td>
+		      <td>{bareMetal.node.resource_class}</td>
+		      <td>{bareMetal.node.provision_state}</td>
+		      <td>{bareMetal.node.power_state}</td>
+		      <td>{bareMetal.network_info}</td>
 		  </tr>
               ))}
 	      </tbody>
@@ -86,15 +135,48 @@ function BareMetal() {
 		  </tr>
 	      </thead>
 	      <tbody>
-              {offerData.map((item) => (
+              {offerData.map((offer) => (
 		  <tr>
-		      <td>{item.resource_class}</td>
-		      <td>{item.count}</td>
+		      <td>{offer.resource_class}</td>
+		      <td>{offer.count}</td>
 		  </tr>
               ))}
 	      </tbody>
           </table>
       )}
+	    {(networkLoading) || (offerLoading) ? (
+		<p>Fetching available node information...</p>
+	    ) : (
+		<>
+	    {fulfillWorking ? (
+		<p>Fulfilling Bare Metal Order...</p>
+	    ) : (
+		<form onSubmit={handleBareMetalOrderFulfillSubmit}>
+		    {offerData.map((offer) => (
+			<input
+			    type="number"
+			    placeholder={offer.resource_class}
+			    id={offer.resource_class}
+			    name={offer.resource_class}
+			    default="0"
+			    min="0"
+			    max={offer.count}
+			    onChange={(event) => nodes.set(offer.resource_class, event.target.value)}
+			/>
+		    ))}
+		    <select name="networkId" value={networkId} onChange={(event) => setNetworkId(event.target.value)}>
+			<option value="">Select a network</option>
+			{networkData.map((network) => (
+			    <option value={network.id}>
+				{network.name}
+			    </option>
+			))}
+		    </select>
+		    <button>Create Bare Metal Order</button>
+		</form>
+	    )}
+		</>
+	    )}
 	</div>
     )
 }
