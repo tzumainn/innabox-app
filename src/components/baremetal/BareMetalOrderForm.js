@@ -75,7 +75,7 @@ function BareMetalOrderForm() {
 	    {offerLoading ? (
 		<p>Fetching available nodes...</p>
 	    ) : (
-		<table>
+		<table class="list">
 		    <thead>
 			<tr>
 			    <th>Resource Class</th>

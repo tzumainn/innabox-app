@@ -37,7 +37,7 @@ function ClusterOrderList() {
 	    {clusterOrderLoading ? (
 		<p>Fetching cluster orders...</p>
 	    ) : (
-		<table>
+		<table class="list">
 		    <thead>
 			<tr>
 			    <th>ID</th>
@@ -48,7 +48,7 @@ function ClusterOrderList() {
 		    </thead>
 		    <tbody>
 			{clusterOrderData.map((clusterOrder) => (
-			    <tr>
+			    <tr class="listitem">
 				<td>{clusterOrder.id}</td>
 				<td>{clusterOrder.spec.templateId}</td>
 				<td>{clusterOrder.spec.state}</td>

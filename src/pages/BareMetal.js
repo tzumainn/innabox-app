@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import Navigation from '../components/Navigation';
+import Header from '../components/Header';
 import BareMetalList from '../components/baremetal/BareMetalList';
 import BareMetalOrderForm from '../components/baremetal/BareMetalOrderForm';
 
 function BareMetal() {    
     return (
-	<div>
-	    <Navigation />
-	    <h1>Leased Nodes</h1>
-	    <BareMetalList />
-	    <h2>Available Nodes</h2>
-	    <BareMetalOrderForm />
-	</div>
+	<>
+	    <Header />
+	    <div class="body">
+		<div class="form">
+		    <h2>Bare Metal Order Form</h2>
+		    <BareMetalOrderForm />
+		</div>
+		<BareMetalList />
+	    </div>
+	</>
     )
 }
 
