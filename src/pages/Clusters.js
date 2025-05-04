@@ -7,11 +7,11 @@ function Clusters() {
     return (
 	<>
 	    <Header />
+	    <div class="form">
+		<h2>Cluster Order Form</h2>
+		<ClusterOrderForm />
+	    </div>
 	    <div class="body">
-		<div class="form">
-		    <h2>Cluster Order Form</h2>
-		    <ClusterOrderForm />
-		</div>
 		<ClusterOrderList />
 	    </div>
 	</>

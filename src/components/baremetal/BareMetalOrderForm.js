@@ -72,9 +72,10 @@ function BareMetalOrderForm() {
     
     return (
 	<div>
-	    {offerLoading ? (
-		<p>Fetching available nodes...</p>
+	    {(offerLoading || networkLoading) ? (
+		<p>Fetching available node information...</p>
 	    ) : (
+		<>
 		<table class="list">
 		    <thead>
 			<tr>
@@ -91,11 +92,6 @@ function BareMetalOrderForm() {
 			))}
 		    </tbody>
 		</table>
-	    )}
-	    {(networkLoading) || (offerLoading) ? (
-		<p>Fetching available node information...</p>
-	    ) : (
-		<>
 		    {fulfillWorking ? (
 			<p>Fulfilling Bare Metal Order...</p>
 		    ) : (

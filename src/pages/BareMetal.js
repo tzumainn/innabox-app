@@ -7,11 +7,11 @@ function BareMetal() {
     return (
 	<>
 	    <Header />
-	    <div class="body">
-		<div class="form">
-		    <h2>Bare Metal Order Form</h2>
-		    <BareMetalOrderForm />
-		</div>
+	    <div class="form">
+		<h2>Bare Metal Order Form</h2>
+		<BareMetalOrderForm />
+	    </div>
+	    <div class="body">	
 		<BareMetalList />
 	    </div>
 	</>
