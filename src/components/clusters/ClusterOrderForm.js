@@ -63,7 +63,7 @@ function ClusterOrderForm() {
 			<Loader text="Fulfilling cluster order" />
 		    ) : (
 			<form onSubmit={handleClusterOrderFulfillSubmit}>
-			    <select name="templateId" value={templateId} onChange={(event) => setTemplateId(event.target.value)}>
+			    <select name="templateId" onChange={(event) => setTemplateId(event.target.value)}>
 				<option value="">Select a template</option>
 				{templateData.items.map((template) => (
 				    <option value={template.id}>

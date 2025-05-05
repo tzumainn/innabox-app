@@ -45,6 +45,8 @@ function BareMetalOrderForm() {
 
     const [networkId, setNetworkId] = useState("");
     const [nodes, setNodes] = useState(new Map());
+    const [imageId, setImageId] = useState("");
+    const [sshKey, setSSHKey] = useState("");
 
     const [fulfillWorking, setFulfillWorking] = useState(false);
     const handleBareMetalOrderFulfillSubmit = (event) => {
@@ -52,8 +54,15 @@ function BareMetalOrderForm() {
 	const bareMetalOrderInfo = {
 	    order_id: "1",
 	    network_id: networkId,
-	    nodes: Array.from(nodes).map((node) => ({resource_class: node[0], number: parseInt(node[1], 10)}))
+	    nodes: Array.from(nodes).map((node) => ({resource_class: node[0], number: parseInt(node[1], 10)})),
 	};
+	if (imageId.trim() != "") {
+	    bareMetalOrderInfo['image'] = imageId;
+	}
+	if (sshKey.trim() != "") {
+	    bareMetalOrderInfo['ssh_keys'] = [sshKey];
+	}
+
 	try {
 	    fetch(process.env.REACT_APP_ESI_API_URL + '/api/v1/baremetal-order/fulfill', {
 		method: "POST",
@@ -70,7 +79,9 @@ function BareMetalOrderForm() {
               console.error('Error creating bare metal order:', error);
 	  }
     };
-    
+
+    const imageData = ['centos9-stream', 'fedora40', 'ubuntu-22.04']
+
     return (
 	<div>
 	    {(offerLoading || networkLoading) ? (
@@ -109,7 +120,7 @@ function BareMetalOrderForm() {
 				    onChange={(event) => nodes.set(offer.resource_class, event.target.value)}
 				/>
 			    ))}
-			    <select name="networkId" value={networkId} onChange={(event) => setNetworkId(event.target.value)}>
+			    <select name="networkId" onChange={(event) => setNetworkId(event.target.value)}>
 				<option value="">Select a network</option>
 				{networkData.map((network) => (
 				    <option value={network.id}>
@@ -117,6 +128,21 @@ function BareMetalOrderForm() {
 				    </option>
 				))}
 			    </select>
+			    <select name="imageId" onChange={(event) => setImageId(event.target.value)}>
+				<option value="">(Optional) Select an image</option>
+				{imageData.map((image) => (
+				    <option value={image}>
+					{image}
+				    </option>
+				))}
+			    </select>
+			    <textarea
+				name="sshKey"
+				placeholder="(Optional) SSH key if provisioning with an image"
+				rows="5"
+				cols="50"
+				onChange={(event => setSSHKey(event.target.value))}
+			    />
 			    <button>Create Bare Metal Order</button>
 			</form>
 		    )}
