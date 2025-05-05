@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Loader from '../Loader';
 
 function BareMetalOrderForm() {
   const [offerData, setOfferData] = useState([]);
@@ -73,7 +74,7 @@ function BareMetalOrderForm() {
     return (
 	<div>
 	    {(offerLoading || networkLoading) ? (
-		<p>Fetching available node information...</p>
+		<Loader text="Fetching available node information" />
 	    ) : (
 		<>
 		<table className="list">
@@ -93,7 +94,7 @@ function BareMetalOrderForm() {
 		    </tbody>
 		</table>
 		    {fulfillWorking ? (
-			<p>Fulfilling Bare Metal Order...</p>
+			<Loader text="Fulfilling bare metal order" />
 		    ) : (
 			<form onSubmit={handleBareMetalOrderFulfillSubmit}>
 			    {offerData.map((offer) => (

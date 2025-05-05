@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Loader from '../Loader';
 
 function ClusterOrderList() {
     const [clusterOrderData, setClusterOrderData] = useState([]);
@@ -30,12 +31,12 @@ function ClusterOrderList() {
     return (
 	<div>
 	    {clusterOrderLoading ? (
-		<p>Fetching cluster orders...</p>
+		<Loader text="Fetching cluster orders" />
 	    ) : (
 		<table className="list">
 		    <thead>
 			<tr className="itemhead">
-			    <th w className="itemcell">ID</th>
+			    <th className="itemcell">ID</th>
 			    <th className="itemcell">Template</th>
 			    <th className="itemcell">Status</th>
 			    <th className="itemcell">Cluster ID</th>			    

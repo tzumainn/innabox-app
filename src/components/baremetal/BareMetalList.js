@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Loader from '../Loader';
 
 function BareMetalList() {
   const [bareMetalData, setBareMetalData] = useState([]);
@@ -26,7 +27,7 @@ function BareMetalList() {
     return (
 	<div>
 	    {bareMetalLoading ? (
-		<p>Fetching leased nodes...</p>
+		<Loader text="Fetching leased nodes" />
 	    ) : (
 		<table className="list">
 		    <thead>

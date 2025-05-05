@@ -24,6 +24,11 @@
   }
 }
 
+.loader {
+    display: flex;
+    alignItems: center;
+}
+
 .body {
   margin-left: 115px;
   padding: 5px;

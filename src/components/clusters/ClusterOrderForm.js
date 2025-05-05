@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Loader from '../Loader';
 
 function ClusterOrderForm() {
     const [templateData, setTemplateData] = useState([]);
@@ -55,11 +56,11 @@ function ClusterOrderForm() {
     return (
 	<div>
 	    {(templateLoading) ? (
-		<p>Fetching available template information...</p>
+		<Loader text="Fetching available template information" />
 	    ) : (
 		<>
 		    {fulfillWorking ? (
-			<p>Fulfilling Cluster Order...</p>
+			<Loader text="Fulfilling cluster order" />
 		    ) : (
 			<form onSubmit={handleClusterOrderFulfillSubmit}>
 			    <select name="templateId" value={templateId} onChange={(event) => setTemplateId(event.target.value)}>
