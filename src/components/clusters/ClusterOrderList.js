@@ -14,7 +14,6 @@ function ClusterOrderList() {
 		    },
 		});
 		const result = await response.json();
-		console.log(JSON.stringify(result));
 		setClusterOrderData(result);
 		setClusterOrderLoading(false);
 	    } catch (error) {
@@ -48,7 +47,7 @@ function ClusterOrderList() {
 			    <tr className="itemrow">
 				<td className="itemcell">{clusterOrder.id}</td>
 				<td className="itemcell">{clusterOrder.spec.templateId}</td>
-				<td className="itemcell">{clusterOrder.spec.state}</td>
+				<td className="itemcell">{clusterOrder.status?.state}</td>
 				<td className="itemcell">{clusterOrder.status?.clusterId}</td>
 			    </tr>
 			))}
