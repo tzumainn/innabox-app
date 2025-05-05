@@ -17,10 +17,6 @@ function ClusterOrderForm() {
 		setTemplateLoading(false);
 	    } catch (error) {
 		console.error('Error fetching cluster templates:', error);
-		setTemplateData([
-		    {id: "template-1", title: "Template 1"},
-		    {id: "template-2", title: "Template 2"}		    
-		])
 		setTemplateLoading(false);
 	    }
 	};
@@ -68,7 +64,7 @@ function ClusterOrderForm() {
 			<form onSubmit={handleClusterOrderFulfillSubmit}>
 			    <select name="templateId" value={templateId} onChange={(event) => setTemplateId(event.target.value)}>
 				<option value="">Select a template</option>
-				{templateData.map((template) => (
+				{templateData.items.map((template) => (
 				    <option value={template.id}>
 					{template.title}
 				    </option>

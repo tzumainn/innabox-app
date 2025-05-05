@@ -17,11 +17,6 @@ function ClusterOrderList() {
 		setClusterOrderLoading(false);
 	    } catch (error) {
 		console.error('Error fetching cluster order data:', error);
-		setClusterOrderData([{
-		    id: "test-uuid",
-		    spec: {templateId: "test-template", state: "depressed"},
-		    status: {clusterId: "blah-blah-blah"}
-		}])
 		setClusterOrderLoading(false);
 	    }
 	};
@@ -47,7 +42,7 @@ function ClusterOrderList() {
 			</tr>
 		    </thead>
 		    <tbody>
-			{clusterOrderData.map((clusterOrder) => (
+			{clusterOrderData.items.map((clusterOrder) => (
 			    <tr class="listitem">
 				<td>{clusterOrder.id}</td>
 				<td>{clusterOrder.spec.templateId}</td>
