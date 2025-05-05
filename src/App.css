@@ -9,14 +9,23 @@
 
 .navigation {
   background-color: #aeb6bf;
-  padding: 20px;
-  height: 10px;
-  justify-content: space-between;
-  align-items: center;
-  vertical-align: center;
+  width: 100px;
+  padding: 5px;
+  float: left;
+  height: 1000px;
+}
+
+.navigationlink {
+  display: block;
+  padding: 10px;
+  color: black;
+  &:hover {
+    background-color: #ddd;
+  }
 }
 
 .body {
+  margin-left: 115px;
   padding: 5px;
   justify-content: space-between;
   align-items: center;
@@ -33,10 +42,18 @@
 
 .list {
     text-align: left;
-    padding: 5px;
-    border-spacing: 15px 0;
+    border-collapse: collapse;
 }
 
-tr:nth-child(even) {
+.itemhead {
+    background-color: #bbd8e7;
+}
+
+.itemrow:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+.itemcell {
+    padding-block: 5px;    
+    padding-inline: 20px;
 }

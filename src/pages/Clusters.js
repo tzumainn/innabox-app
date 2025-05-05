@@ -5,11 +5,11 @@ import ClusterOrderForm from '../components/clusters/ClusterOrderForm';
 function Clusters() {
     return (
 	<>
-	    <div className="form">
-		<h2>Cluster Order Form</h2>
-		<ClusterOrderForm />
-	    </div>
 	    <div className="body">
+  		<div className="form">
+		    <h2>Cluster Order Form</h2>
+		    <ClusterOrderForm />
+		</div>
 		<ClusterOrderList />
 	    </div>
 	</>

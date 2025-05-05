@@ -34,20 +34,20 @@ function ClusterOrderList() {
 	    ) : (
 		<table className="list">
 		    <thead>
-			<tr>
-			    <th>ID</th>
-			    <th>Template</th>
-			    <th>Status</th>
-			    <th>Cluster ID</th>			    
+			<tr className="itemhead">
+			    <th w className="itemcell">ID</th>
+			    <th className="itemcell">Template</th>
+			    <th className="itemcell">Status</th>
+			    <th className="itemcell">Cluster ID</th>			    
 			</tr>
 		    </thead>
 		    <tbody>
 			{clusterOrderData.items.map((clusterOrder) => (
-			    <tr className="listitem">
-				<td>{clusterOrder.id}</td>
-				<td>{clusterOrder.spec.templateId}</td>
-				<td>{clusterOrder.spec.state}</td>
-				<td>{clusterOrder.status.clusterId}</td>				
+			    <tr className="itemrow">
+				<td className="itemcell">{clusterOrder.id}</td>
+				<td className="itemcell">{clusterOrder.spec.templateId}</td>
+				<td className="itemcell">{clusterOrder.spec.state}</td>
+				<td className="itemcell">{clusterOrder.status.clusterId}</td>				
 			    </tr>
 			))}
 		    </tbody>

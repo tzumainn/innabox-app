@@ -30,22 +30,22 @@ function BareMetalList() {
 	    ) : (
 		<table className="list">
 		    <thead>
-			<tr className="listitem">
-			    <th>Name</th>
-			    <th>Resource Class</th>
-			    <th>Provision State</th>
-			    <th>Power State</th>
-			    <th>Network Info</th>
+			<tr className="itemhead">
+			    <th className="itemcell">Name</th>
+			    <th className="itemcell">Resource Class</th>
+			    <th className="itemcell">Provision State</th>
+			    <th className="itemcell">Power State</th>
+			    <th className="itemcell">Network Info</th>
 			</tr>
 		    </thead>
 		    <tbody>
 			{bareMetalData.map((bareMetal) => (
-			    <tr className="listitem">
-				<td>{bareMetal.node.name}</td>
-				<td>{bareMetal.node.resource_class}</td>
-				<td>{bareMetal.node.provision_state}</td>
-				<td>{bareMetal.node.power_state}</td>
-				<td>{bareMetal.network_info}</td>
+			    <tr className="itemrow">
+				<td className="itemcell">{bareMetal.node.name}</td>
+				<td className="itemcell">{bareMetal.node.resource_class}</td>
+				<td className="itemcell">{bareMetal.node.provision_state}</td>
+				<td className="itemcell">{bareMetal.node.power_state}</td>
+				<td className="itemcell">{bareMetal.network_info}</td>
 			    </tr>
 			))}
 		    </tbody>

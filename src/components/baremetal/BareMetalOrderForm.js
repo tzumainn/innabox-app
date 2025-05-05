@@ -78,16 +78,16 @@ function BareMetalOrderForm() {
 		<>
 		<table className="list">
 		    <thead>
-			<tr>
-			    <th>Resource Class</th>
-			    <th>Number Available</th>
+			<tr className="itemhead">
+			    <th className="itemcell">Resource Class</th>
+			    <th className="itemcell">Number Available</th>
 			</tr>
 		    </thead>
 		    <tbody>
 			{offerData.map((offer) => (
-			    <tr>
-				<td>{offer.resource_class}</td>
-				<td>{offer.count}</td>
+			    <tr className="itemrow">
+				<td className="itemcell">{offer.resource_class}</td>
+				<td className="itemcell">{offer.count}</td>
 			    </tr>
 			))}
 		    </tbody>
