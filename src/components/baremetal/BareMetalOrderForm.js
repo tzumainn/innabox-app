@@ -76,7 +76,7 @@ function BareMetalOrderForm() {
 		<p>Fetching available node information...</p>
 	    ) : (
 		<>
-		<table class="list">
+		<table className="list">
 		    <thead>
 			<tr>
 			    <th>Resource Class</th>

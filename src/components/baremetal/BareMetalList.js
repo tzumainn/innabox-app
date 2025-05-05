@@ -28,9 +28,9 @@ function BareMetalList() {
 	    {bareMetalLoading ? (
 		<p>Fetching leased nodes...</p>
 	    ) : (
-		<table class="list">
+		<table className="list">
 		    <thead>
-			<tr class="listitem">
+			<tr className="listitem">
 			    <th>Name</th>
 			    <th>Resource Class</th>
 			    <th>Provision State</th>
@@ -40,7 +40,7 @@ function BareMetalList() {
 		    </thead>
 		    <tbody>
 			{bareMetalData.map((bareMetal) => (
-			    <tr class="listitem">
+			    <tr className="listitem">
 				<td>{bareMetal.node.name}</td>
 				<td>{bareMetal.node.resource_class}</td>
 				<td>{bareMetal.node.provision_state}</td>
