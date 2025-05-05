@@ -56,10 +56,10 @@ function BareMetalOrderForm() {
 	    network_id: networkId,
 	    nodes: Array.from(nodes).map((node) => ({resource_class: node[0], number: parseInt(node[1], 10)})),
 	};
-	if (imageId.trim() != "") {
+	if (imageId.trim() !== "") {
 	    bareMetalOrderInfo['image'] = imageId;
 	}
-	if (sshKey.trim() != "") {
+	if (sshKey.trim() !== "") {
 	    bareMetalOrderInfo['ssh_keys'] = [sshKey];
 	}
 
