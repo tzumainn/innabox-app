@@ -83,6 +83,7 @@
 
 .subitemcell {
     padding-block: 1px;
-    padding-inline: 1px;
+    padding-inline: 5px;
     font-size: 0.75em;
+    vertical-align: top;
 }

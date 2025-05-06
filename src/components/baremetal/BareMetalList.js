@@ -82,10 +82,37 @@ function BareMetalList() {
 				  </td>
 			    	  <td className="itemcell" colSpan="2">
 				      <table>
-					  <tbody>
+					  <thead>
 					      <tr>
-						  <td className="subitemcell">{bareMetal.network_info}</td>
+						  <th className="subitemcell">Port</th>
+						  <th className="subitemcell">Network</th>
+						  <th className="subitemcell">Fixed IP</th>
+						  <th className="subitemcell">Floating IP</th>
 					      </tr>
+					  </thead>
+					  <tbody>
+					      {bareMetal.network_info.map(network => (
+						  <tr>
+						      <td className="subitemcell">
+							  {network.baremetal_port.address}
+						      </td>
+						      <td className="subitemcell">
+							  {(network.network) &&
+							   <>{network.network.name + '(' + network.network.provider_segmentation_id + ')'}</>
+							  }
+						      </td>
+						       <td className="subitemcell">
+							   {(network.network_ports[0]?.fixed_ips.length > 0) &&
+							    <>{network.network_ports[0].fixed_ips[0].ip_address}</>
+							   }
+						       </td>
+						       <td className="subitemcell">
+							   {(network.floating_ip) &&
+							    <>{network.floating_ip}</>
+							   }
+						       </td>
+						  </tr>
+					      ))}
 					  </tbody>
 				      </table>
 				  </td>
