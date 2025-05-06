@@ -45,6 +45,7 @@ function ClusterOrderForm() {
 		body: JSON.stringify(clusterOrderInfo),
 	    })
             setFulfillWorking(true);
+	    setTemplateId("");
 	    setTimeout(() => {
 		setFulfillWorking(false);
 	    }, 5000);

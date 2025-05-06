@@ -47,6 +47,7 @@ function BareMetalOrderForm() {
     const [nodes, setNodes] = useState(new Map());
     const [imageId, setImageId] = useState("");
     const [sshKey, setSSHKey] = useState("");
+    const [floatingIPCreate, setFloatingIPCreate] = useState(false);
 
     const [fulfillWorking, setFulfillWorking] = useState(false);
     const handleBareMetalOrderFulfillSubmit = (event) => {
@@ -55,6 +56,7 @@ function BareMetalOrderForm() {
 	    order_id: "1",
 	    network_id: networkId,
 	    nodes: Array.from(nodes).map((node) => ({resource_class: node[0], number: parseInt(node[1], 10)})),
+	    create_floating_ip: floatingIPCreate.toString(),
 	};
 	if (imageId.trim() !== "") {
 	    bareMetalOrderInfo['image'] = imageId;
@@ -71,7 +73,12 @@ function BareMetalOrderForm() {
 		},
 		body: JSON.stringify(bareMetalOrderInfo),
 	    })
-            setFulfillWorking(true);
+	    setFulfillWorking(true);
+	    setNetworkId("");
+	    setNodes(new Map());
+	    setImageId("");
+	    setSSHKey("");
+	    setFloatingIPCreate(false);
 	    setTimeout(() => {
 		setFulfillWorking(false);
 	    }, 120000);
@@ -108,42 +115,68 @@ function BareMetalOrderForm() {
 			<Loader text="Fulfilling bare metal order" />
 		    ) : (
 			<form onSubmit={handleBareMetalOrderFulfillSubmit}>
-			    {offerData.map((offer) => (
-				<input
-				    type="number"
-				    placeholder={offer.resource_class}
-				    id={offer.resource_class}
-				    name={offer.resource_class}
-				    default="0"
-				    min="0"
-				    max={offer.count}
-				    onChange={(event) => nodes.set(offer.resource_class, event.target.value)}
-				/>
-			    ))}
-			    <select name="networkId" onChange={(event) => setNetworkId(event.target.value)}>
-				<option value="">Select a network</option>
-				{networkData.map((network) => (
-				    <option value={network.id}>
-					{network.name}
-				    </option>
-				))}
-			    </select>
-			    <select name="imageId" onChange={(event) => setImageId(event.target.value)}>
-				<option value="">(Optional) Select an image</option>
-				{imageData.map((image) => (
-				    <option value={image}>
-					{image}
-				    </option>
-				))}
-			    </select>
-			    <textarea
-				name="sshKey"
-				placeholder="(Optional) SSH key if provisioning with an image"
-				rows="5"
-				cols="50"
-				onChange={(event => setSSHKey(event.target.value))}
-			    />
-			    <button>Create Bare Metal Order</button>
+			    <table>
+				<tbody>
+				    <tr>
+					<td>
+					    {offerData.map((offer) => (
+						<input
+						    type="number"
+						    placeholder={offer.resource_class}
+						    id={offer.resource_class}
+						    name={offer.resource_class}
+						    default="0"
+						    min="0"
+						    max={offer.count}
+						    onChange={(event) => nodes.set(offer.resource_class, event.target.value)}
+						/>
+					    ))}
+					</td>
+					<td>
+					    <select name="networkId" onChange={(event) => setNetworkId(event.target.value)}>
+						<option value="">Select a network</option>
+						{networkData.map((network) => (
+						    <option value={network.id}>
+							{network.name}
+						    </option>
+						))}
+					    </select>
+					</td>
+					<td>
+					    <select name="imageId" onChange={(event) => setImageId(event.target.value)}>
+						<option value="">(Optional) Select an image</option>
+						{imageData.map((image) => (
+						    <option value={image}>
+							{image}
+						    </option>
+						))}
+					    </select>
+					</td>
+				    </tr>
+				    <tr>
+					<td colSpan="3">
+					    <textarea
+						name="sshKey"
+						placeholder="(Optional) SSH key if provisioning with an image"
+						rows="5"
+						cols="50"
+						onChange={(event => setSSHKey(event.target.value))}
+					    />
+					</td>
+				    </tr>
+				    <tr>
+					<td colSpan="3" align="center">
+					    <label htmlFor="floatingIP">Attach floating IP?</label>
+					    <input type="checkbox" id="floatingIP" onChange={(event) => setFloatingIPCreate(event.target.checked)} />
+					</td>
+				    </tr>
+				    <tr>
+					<td colSpan="3" align="center">
+					    <button>Create Bare Metal Order</button>
+					</td>
+				    </tr>
+				</tbody>
+			    </table>
 			</form>
 		    )}
 		</>
