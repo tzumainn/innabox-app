@@ -6,7 +6,7 @@ function BareMetal() {
     return (
 	<>
 	    <div className="body">	
-		<div className="form">
+		<div className="form" align="center">
 		    <h2>Bare Metal Order Form</h2>
 		    <BareMetalOrderForm />
 		</div>

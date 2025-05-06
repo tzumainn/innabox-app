@@ -56,6 +56,8 @@
 .list {
     text-align: left;
     border-collapse: collapse;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 
 .itemhead {

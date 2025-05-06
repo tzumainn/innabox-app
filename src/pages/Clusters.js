@@ -6,7 +6,7 @@ function Clusters() {
     return (
 	<>
 	    <div className="body">
-  		<div className="form">
+  		<div className="form" align="center">
 		    <h2>Cluster Order Form</h2>
 		    <ClusterOrderForm />
 		</div>
