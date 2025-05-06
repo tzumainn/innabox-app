@@ -33,7 +33,7 @@ function ClusterOrderList() {
 	    {clusterOrderLoading ? (
 		<Loader text="Fetching cluster orders" />
 	    ) : (
-		<table className="list">
+		<table className="list" width="1000">
 		    <thead>
 			<tr className="itemhead">
 			    <th className="itemcell">ID</th>

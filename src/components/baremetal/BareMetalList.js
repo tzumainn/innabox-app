@@ -32,7 +32,7 @@ function BareMetalList() {
 	    {bareMetalLoading ? (
 		<Loader text="Fetching leased nodes" />
 	    ) : (
-		<table className="list">
+		<table className="list" width="1000">
 		    <thead>
 			<tr className="itemhead">
 			    <td className="itemcell"></td>
@@ -45,7 +45,7 @@ function BareMetalList() {
 		    {bareMetalData.map((bareMetal) => (
 			<tbody>
 			    <tr className="itemrow">
-				<td className="itemcell">
+				<td className="itemcell" width="10">
 				    { nodeExpanded.includes(bareMetal.node.uuid) ? (
 					<Link
 					    className="expandedlink"
@@ -60,10 +60,10 @@ function BareMetalList() {
 					</Link>
 				    )}
 				</td>
-				<td className="itemcell">{bareMetal.node.name}</td>
-				<td className="itemcell">{bareMetal.node.resource_class}</td>
-				<td className="itemcell">{bareMetal.node.provision_state}</td>
-				<td className="itemcell">{bareMetal.node.power_state}</td>
+				<td className="itemcell" width="250">{bareMetal.node.name}</td>
+				<td className="itemcell" width="250">{bareMetal.node.resource_class}</td>
+				<td className="itemcell" width="250">{bareMetal.node.provision_state}</td>
+				<td className="itemcell" width="250">{bareMetal.node.power_state}</td>
 			    </tr>
 			    { (nodeExpanded.includes(bareMetal.node.uuid)) &&
 			      <tr className="subitemrow">

@@ -88,7 +88,7 @@ function BareMetalOrderForm() {
 		<Loader text="Fetching available node information" />
 	    ) : (
 		<>
-		<table className="list">
+		<table className="list" width="450">
 		    <thead>
 			<tr className="itemhead">
 			    <th className="itemcell">Resource Class</th>
