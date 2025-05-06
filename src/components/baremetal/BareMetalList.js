@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import Loader from '../Loader';
 
 function BareMetalList() {
@@ -24,6 +25,8 @@ function BareMetalList() {
       return () => clearInterval(bareMetalIntervalId)
   }, []);
 
+    const [nodeExpanded, setNodeExpanded] = useState([]);
+
     return (
 	<div>
 	    {bareMetalLoading ? (
@@ -32,24 +35,64 @@ function BareMetalList() {
 		<table className="list">
 		    <thead>
 			<tr className="itemhead">
+			    <td className="itemcell"></td>
 			    <th className="itemcell">Name</th>
 			    <th className="itemcell">Resource Class</th>
 			    <th className="itemcell">Provision State</th>
 			    <th className="itemcell">Power State</th>
-			    <th className="itemcell">Network Info</th>
 			</tr>
 		    </thead>
-		    <tbody>
-			{bareMetalData.map((bareMetal) => (
+		    {bareMetalData.map((bareMetal) => (
+			<tbody>
 			    <tr className="itemrow">
+				<td className="itemcell">
+				    { nodeExpanded.includes(bareMetal.node.uuid) ? (
+					<Link
+					    className="expandedlink"
+					    onClick={() => setNodeExpanded(nodeExpanded.filter(uuid => uuid !== bareMetal.node.uuid))}>
+					    -
+					</Link>
+				    ) : (
+					<Link
+					    className="expandedlink"
+					    onClick={() => setNodeExpanded(nodeExpanded => [...nodeExpanded, bareMetal.node.uuid])}>
+					    +
+					</Link>
+				    )}
+				</td>
 				<td className="itemcell">{bareMetal.node.name}</td>
 				<td className="itemcell">{bareMetal.node.resource_class}</td>
 				<td className="itemcell">{bareMetal.node.provision_state}</td>
 				<td className="itemcell">{bareMetal.node.power_state}</td>
-				<td className="itemcell">{bareMetal.network_info}</td>
 			    </tr>
-			))}
-		    </tbody>
+			    { (nodeExpanded.includes(bareMetal.node.uuid)) &&
+			      <tr className="subitemrow">
+				  <td></td>
+			    	  <td className="itemcell" colSpan="2">
+				      <table>
+					  <tbody>
+					      {Object.keys(bareMetal.node.properties).map((key, index) => (
+						  <tr>
+						      <td className="subitemcell"><b>{key}</b></td>
+						      <td className="subitemcell">{JSON.stringify(bareMetal.node.properties[key])}</td>
+						  </tr>
+					      ))}
+					  </tbody>
+				      </table>
+				  </td>
+			    	  <td className="itemcell" colSpan="2">
+				      <table>
+					  <tbody>
+					      <tr>
+						  <td className="subitemcell">{bareMetal.network_info}</td>
+					      </tr>
+					  </tbody>
+				      </table>
+				  </td>
+			      </tr>
+			    }
+			</tbody>
+		    ))}
 		</table>
 	    )}
 	</div>
