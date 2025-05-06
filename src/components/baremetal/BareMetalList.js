@@ -94,16 +94,16 @@ function BareMetalList() {
 					      {bareMetal.network_info.map(network => (
 						  <tr>
 						      <td className="subitemcell">
-							  {network.baremetal_port.address}
+							  {network.mac_address}
 						      </td>
 						      <td className="subitemcell">
 							  {(network.network) &&
-							   <>{network.network.name + '(' + network.network.provider_segmentation_id + ')'}</>
+							   <>{network.network + '(' + network.provider_segmentation_id + ')'}</>
 							  }
 						      </td>
 						       <td className="subitemcell">
-							   {(network.network_ports[0]?.fixed_ips.length > 0) &&
-							    <>{network.network_ports[0].fixed_ips[0].ip_address}</>
+							   {(network.fixed_ip) &&
+							    <>{network.fixed_ip}</>
 							   }
 						       </td>
 						       <td className="subitemcell">
