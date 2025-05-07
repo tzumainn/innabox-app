@@ -11,7 +11,9 @@ function BareMetalList() {
 	try {
             const response = await fetch(process.env.REACT_APP_ESI_API_URL + '/api/v1/nodes/list');
             const result = await response.json();
-            setBareMetalData(result);
+	    const sortedResult = [...result];
+	    sortedResult.sort((a, b) => (a.lease_info[0].start_time > b.lease_info[0].start_time) ? -1 : 1);
+            setBareMetalData(sortedResult);
             setBareMetalLoading(false);
 	} catch (error) {
             console.error('Error fetching bare metal data:', error);
