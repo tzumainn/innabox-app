@@ -14,7 +14,9 @@ function ClusterOrderList() {
 		    },
 		});
 		const result = await response.json();
-		setClusterOrderData(result);
+		const sortedResult = [...result.items];
+		sortedResult.sort((a, b) => (a.metadata.creationTimestamp > b.metadata.creationTimestamp) ? -1 : 1);
+		setClusterOrderData(sortedResult);
 		setClusterOrderLoading(false);
 	    } catch (error) {
 		console.error('Error fetching cluster order data:', error);
@@ -43,7 +45,7 @@ function ClusterOrderList() {
 			</tr>
 		    </thead>
 		    <tbody>
-			{clusterOrderData.items.map((clusterOrder) => (
+			{clusterOrderData.map((clusterOrder) => (
 			    <tr className="itemrow">
 				<td className="itemcell">{clusterOrder.id}</td>
 				<td className="itemcell">{clusterOrder.spec.templateId}</td>
