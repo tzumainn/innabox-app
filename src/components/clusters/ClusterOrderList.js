@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import Loader from '../Loader';
 
 function ClusterOrderList() {
@@ -29,7 +30,9 @@ function ClusterOrderList() {
 	
 	return () => clearInterval(clusterOrderIntervalId)
     }, []);
-    
+
+    const [clusterOrderExpanded, setClusterOrderExpanded] = useState([]);
+
     return (
 	<div>
 	    {clusterOrderLoading ? (
@@ -38,22 +41,52 @@ function ClusterOrderList() {
 		<table className="list" width="1000">
 		    <thead>
 			<tr className="itemhead">
+			    <td className="itemcell"></td>
 			    <th className="itemcell">ID</th>
 			    <th className="itemcell">Template</th>
 			    <th className="itemcell">Status</th>
-			    <th className="itemcell">Cluster ID</th>			    
 			</tr>
 		    </thead>
-		    <tbody>
-			{clusterOrderData.map((clusterOrder) => (
+		    {clusterOrderData.map((clusterOrder) => (
+			<tbody>
 			    <tr className="itemrow">
+				<td className="itemcell" width="10">
+				    { !(clusterOrder.status?.clusterId)
+				      ? <></>
+				      : <>
+					    { clusterOrderExpanded.includes(clusterOrder.id) ? (
+						<Link
+						    className="expandedlink"
+						    onClick={() => setClusterOrderExpanded(clusterOrderExpanded.filter(id => id !== clusterOrder.id))}>
+						    -
+						</Link>
+					    ) : (
+						<Link
+						    className="expandedlink"
+						    onClick={() => setClusterOrderExpanded(clusterOrderExpanded => [...clusterOrderExpanded, clusterOrder.id])}>
+						    +
+						</Link>
+					    )}
+					</>
+				    }
+				</td>
 				<td className="itemcell">{clusterOrder.id}</td>
 				<td className="itemcell">{clusterOrder.spec.templateId}</td>
 				<td className="itemcell">{clusterOrder.status?.state}</td>
-				<td className="itemcell">{clusterOrder.status?.clusterId}</td>
 			    </tr>
-			))}
-		    </tbody>
+			    { (clusterOrderExpanded.includes(clusterOrder.id)) &&
+			      <tr className="subitemrow">
+				  <td></td>
+			    	  <td className="itemcell" colSpan="2">
+				      CONSOLE URL PLACEHOLDER
+				  </td>
+			    	  <td className="itemcell">
+				      KUBECONFIG PLACEHOLDER
+				  </td>
+			      </tr>
+			    }
+			</tbody>
+		    ))}
 		</table>
 	    )}
 	</div>
