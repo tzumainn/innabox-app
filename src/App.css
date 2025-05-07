@@ -1,15 +1,16 @@
 .header {
-  background-color: #5d6d7e;
+  background-color: #b2c2bf;
   padding: 20px;
   height: 70px;
   justify-content: space-between;
   align-items: center;
   vertical-align: center;
+  font-color: white;
 }
 
 .navigation {
-  background-color: #aeb6bf;
-  width: 100px;
+  background-color: #eaece5;    
+  width: 150px;
   padding: 5px;
   float: left;
   height: 1000px;
@@ -40,6 +41,8 @@
 .body {
   margin-left: 115px;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
@@ -49,8 +52,11 @@
   padding: 5px;
   width: 500px;
   justify-content: space-between;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin: 10px;
+  margin: 20px;
+  background-color: #faf9f6;
 }
 
 .list {
@@ -63,7 +69,7 @@
 .itemhead {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    background-color: #bbd8e7;
+    background-color: #c0ded9;
 }
 
 .itemrow {
@@ -88,4 +94,8 @@
     padding-inline: 5px;
     font-size: 0.75em;
     vertical-align: top;
+}
+
+input[type='number'] {
+    width: 50px;
 }

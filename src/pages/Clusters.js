@@ -7,7 +7,6 @@ function Clusters() {
 	<>
 	    <div className="body">
   		<div className="form" align="center">
-		    <h2>Cluster Order Form</h2>
 		    <ClusterOrderForm />
 		</div>
 		<ClusterOrderList />
