@@ -72,7 +72,7 @@ function ClusterOrderForm() {
 				    </option>
 				))}
 			    </select>
-			    <button>Create Cluster Order</button>
+			    <button>Create OpenShift Cluster Order</button>
 			</form>
 		    )}
 		</>

@@ -43,7 +43,7 @@ function ClusterOrderList() {
 		    <thead>
 			<tr className="itemhead">
 			    <td className="itemcell"></td>
-			    <th className="itemcell">Cluster Order ID</th>
+			    <th className="itemcell">OpenShift Cluster Order ID</th>
 			    <th className="itemcell">Template</th>
 			    <th className="itemcell">Status</th>
 			    <th className="itemcell">Created</th>
