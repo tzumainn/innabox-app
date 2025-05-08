@@ -42,7 +42,7 @@ function ClusterOrderList() {
 		    <thead>
 			<tr className="itemhead">
 			    <td className="itemcell"></td>
-			    <th className="itemcell">ID</th>
+			    <th className="itemcell">Cluster ID</th>
 			    <th className="itemcell">Template</th>
 			    <th className="itemcell">Status</th>
 			</tr>
