@@ -17,6 +17,7 @@ function ClusterOrderList() {
 		const result = await response.json();
 		const sortedResult = [...result.items];
 		sortedResult.sort((a, b) => (a.metadata.creationTimestamp > b.metadata.creationTimestamp) ? -1 : 1);
+		console.log(JSON.stringify(sortedResult));
 		setClusterOrderData(sortedResult);
 		setClusterOrderLoading(false);
 	    } catch (error) {
@@ -38,13 +39,14 @@ function ClusterOrderList() {
 	    {clusterOrderLoading ? (
 		<Loader text="Fetching cluster orders" />
 	    ) : (
-		<table className="list" width="1000">
+		<table className="list" width="1050">
 		    <thead>
 			<tr className="itemhead">
 			    <td className="itemcell"></td>
 			    <th className="itemcell">Cluster ID</th>
 			    <th className="itemcell">Template</th>
 			    <th className="itemcell">Status</th>
+			    <th className="itemcell">Created</th>
 			</tr>
 		    </thead>
 		    {clusterOrderData.map((clusterOrder) => (
@@ -70,17 +72,18 @@ function ClusterOrderList() {
 					</>
 				    }
 				</td>
-				<td className="itemcell">{clusterOrder.id}</td>
-				<td className="itemcell">{clusterOrder.spec.templateId}</td>
-				<td className="itemcell">{clusterOrder.status?.state}</td>
+				<td className="itemcell" width="425">{clusterOrder.id}</td>
+				<td className="itemcell" width="125">{clusterOrder.spec.templateId}</td>
+				<td className="itemcell" width="125">{clusterOrder.status?.state.replace("CLUSTER_ORDER_STATE_","")}</td>
+				<td className="itemcell" width="365">{new Date(clusterOrder.metadata?.creationTimestamp).toUTCString()}</td>
 			    </tr>
 			    { (clusterOrderExpanded.includes(clusterOrder.id)) &&
 			      <tr className="subitemrow">
 				  <td></td>
-			    	  <td className="itemcell" colSpan="2">
+				  <td className="itemcell" colSpan="2">
 				      CONSOLE URL PLACEHOLDER
 				  </td>
-			    	  <td className="itemcell">
+				  <td className="itemcell" colSpan="2">
 				      KUBECONFIG PLACEHOLDER
 				  </td>
 			      </tr>

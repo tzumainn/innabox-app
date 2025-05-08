@@ -34,14 +34,15 @@ function BareMetalList() {
 	    {bareMetalLoading ? (
 		<Loader text="Fetching leased nodes" />
 	    ) : (
-		<table className="list" width="1000">
+		<table className="list" width="1050">
 		    <thead>
 			<tr className="itemhead">
 			    <td className="itemcell"></td>
-			    <th className="itemcell">Bare Metal Node Name</th>
+			    <th className="itemcell">Bare Metal Node</th>
 			    <th className="itemcell">Resource Class</th>
 			    <th className="itemcell">Provision State</th>
 			    <th className="itemcell">Power State</th>
+			    <th className="itemcell">Lease Date</th>
 			</tr>
 		    </thead>
 		    {bareMetalData.map((bareMetal) => (
@@ -62,10 +63,11 @@ function BareMetalList() {
 					</Link>
 				    )}
 				</td>
-				<td className="itemcell" width="250">{bareMetal.node.name}</td>
-				<td className="itemcell" width="250">{bareMetal.node.resource_class}</td>
-				<td className="itemcell" width="250">{bareMetal.node.provision_state}</td>
-				<td className="itemcell" width="250">{bareMetal.node.power_state}</td>
+				<td className="itemcell" width="225">{bareMetal.node.name}</td>
+				<td className="itemcell" width="150">{bareMetal.node.resource_class}</td>
+				<td className="itemcell" width="150">{bareMetal.node.provision_state}</td>
+				<td className="itemcell" width="125">{bareMetal.node.power_state}</td>
+				<td className="itemcell" width="390">{new Date(bareMetal.lease_info[0]?.start_time).toUTCString()}</td>
 			    </tr>
 			    { (nodeExpanded.includes(bareMetal.node.uuid)) &&
 			      <tr className="subitemrow">
@@ -82,7 +84,7 @@ function BareMetalList() {
 					  </tbody>
 				      </table>
 				  </td>
-			    	  <td className="itemcell" colSpan="2">
+				  <td className="itemcell" colSpan="3">
 				      <table>
 					  <thead>
 					      <tr>
