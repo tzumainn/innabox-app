@@ -1,5 +1,5 @@
 .header {
-  background-color: #b2c2bf;
+  background-color: #89aac3;
   padding: 20px;
   height: 70px;
   justify-content: space-between;
@@ -9,11 +9,11 @@
 }
 
 .navigation {
-  background-color: #eaece5;    
-  width: 150px;
-  padding: 5px;
-  float: left;
-  height: 1000px;
+    background-color: #c8b6a6;
+    width: 150px;
+    padding: 5px;
+    float: left;
+    height: 1000px;
 }
 
 .navigationlink {
@@ -56,7 +56,7 @@
   flex-direction: column;
   align-items: center;
   margin: 20px;
-  background-color: #faf9f6;
+  background-color: #ebebeb;
 }
 
 .list {
@@ -69,13 +69,13 @@
 .itemhead {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    background-color: #c0ded9;
+    background-color: #e7d8c9;
 }
 
 .itemrow {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    background-color: #f2f2f2;
+    background-color: #f4f4f4;
 }
 
 .subitemrow {
