@@ -63,11 +63,11 @@ function BareMetalList() {
 					</Link>
 				    )}
 				</td>
-				<td className="itemcell" width="225">{bareMetal.node.name}</td>
+				<td className="itemcell" width="250">{bareMetal.node.name}</td>
 				<td className="itemcell" width="150">{bareMetal.node.resource_class}</td>
 				<td className="itemcell" width="150">{bareMetal.node.provision_state}</td>
 				<td className="itemcell" width="125">{bareMetal.node.power_state}</td>
-				<td className="itemcell" width="390">{new Date(bareMetal.lease_info[0]?.start_time).toUTCString()}</td>
+				<td className="itemcell" width="365">{new Date(bareMetal.lease_info[0]?.start_time).toUTCString()}</td>
 			    </tr>
 			    { (nodeExpanded.includes(bareMetal.node.uuid)) &&
 			      <tr className="subitemrow">
