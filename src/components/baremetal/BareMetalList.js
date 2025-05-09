@@ -22,7 +22,7 @@ function BareMetalList() {
     };
 
       fetchBareMetalData();
-      const bareMetalIntervalId = setInterval(fetchBareMetalData, 60000);
+      const bareMetalIntervalId = setInterval(fetchBareMetalData, 15000);
 
       return () => clearInterval(bareMetalIntervalId)
   }, []);
