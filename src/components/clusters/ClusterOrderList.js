@@ -15,9 +15,8 @@ function ClusterOrderList() {
 		    },
 		});
 		const result = await response.json();
-		const sortedResult = [...result.items];
+		const sortedResult = [...result.items.filter(order => order.metadata.deletionTimestamp === null)];
 		sortedResult.sort((a, b) => (a.metadata.creationTimestamp > b.metadata.creationTimestamp) ? -1 : 1);
-		console.log(JSON.stringify(sortedResult));
 		setClusterOrderData(sortedResult);
 		setClusterOrderLoading(false);
 	    } catch (error) {
