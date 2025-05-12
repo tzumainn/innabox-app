@@ -48,7 +48,7 @@ function ClusterOrderForm() {
 	    setTemplateId("");
 	    setTimeout(() => {
 		setFulfillWorking(false);
-	    }, 5000);
+	    }, 30000);
 	} catch (error) {
             console.error('Error creating cluster order:', error);
 	}
