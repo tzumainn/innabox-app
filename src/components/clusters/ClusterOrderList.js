@@ -26,7 +26,7 @@ function ClusterOrderList() {
 	};
 	
 	fetchClusterOrderData();
-	const clusterOrderIntervalId = setInterval(fetchClusterOrderData, 60000);
+	const clusterOrderIntervalId = setInterval(fetchClusterOrderData, 15000);
 	
 	return () => clearInterval(clusterOrderIntervalId)
     }, []);
