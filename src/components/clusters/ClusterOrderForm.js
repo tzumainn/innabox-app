@@ -14,7 +14,8 @@ function ClusterOrderForm() {
 		    },
 		});
 		const result = await response.json();
-		setTemplateData(result);
+		const filteredResult = [...result.items.filter(template => template.metadata.deletionTimestamp === null)];
+		setTemplateData(filteredResult);
 		setTemplateLoading(false);
 	    } catch (error) {
 		console.error('Error fetching cluster templates:', error);
@@ -66,7 +67,7 @@ function ClusterOrderForm() {
 			<form onSubmit={handleClusterOrderFulfillSubmit}>
 			    <select name="templateId" onChange={(event) => setTemplateId(event.target.value)}>
 				<option value="">Select a template</option>
-				{templateData.items.map((template) => (
+				{templateData.map((template) => (
 				    <option value={template.id}>
 					{template.title}
 				    </option>
