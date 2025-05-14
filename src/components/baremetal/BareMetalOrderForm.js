@@ -8,9 +8,8 @@ function BareMetalOrderForm() {
   useEffect(() => {
       const fetchOfferData = async () => {
 	  try {
-              //const response = await fetch(process.env.REACT_APP_ESI_API_URL + '/api/v1/offers/list');
-              //const result = await response.json();
-	      const result = [{"resource_class": "fc430", "count": 10}, {"resource_class": "fc830", "count": 5}];
+              const response = await fetch(process.env.REACT_APP_ESI_API_URL + '/api/v1/offers/list');
+              const result = await response.json();
               setOfferData(result);
               setOfferLoading(false);
 	  } catch (error) {
@@ -31,9 +30,8 @@ function BareMetalOrderForm() {
   useEffect(() => {
       const fetchNetworkData = async () => {
 	  try {
-              //const response = await fetch(process.env.REACT_APP_ESI_API_URL + '/api/v1/networks/list');
-              //const result = await response.json();
-	      const result = [{"id": "1", "name": "network-1"}, {"id": "2", "name": "network-2"}];
+              const response = await fetch(process.env.REACT_APP_ESI_API_URL + '/api/v1/networks/list');
+              const result = await response.json();
               setNetworkData(result);
               setNetworkLoading(false);
 	  } catch (error) {
