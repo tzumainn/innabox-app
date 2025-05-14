@@ -38,7 +38,7 @@ function BareMetalList() {
 		    <thead>
 			<tr className="itemhead">
 			    <td className="itemcell"></td>
-			    <th className="itemcell">Bare Metal Node</th>
+			    <th className="itemcell">Bare Metal Machine</th>
 			    <th className="itemcell">Resource Class</th>
 			    <th className="itemcell">Provision State</th>
 			    <th className="itemcell">Power State</th>
