@@ -9,11 +9,14 @@ function BareMetalList() {
   useEffect(() => {
     const fetchBareMetalData = async () => {
 	try {
-            const response = await fetch(process.env.REACT_APP_ESI_API_URL + '/api/v1/nodes/list');
-            const result = await response.json();
-	    const sortedResult = [...result];
-	    sortedResult.sort((a, b) => (a.lease_info[0].start_time > b.lease_info[0].start_time) ? -1 : 1);
-            setBareMetalData(sortedResult);
+            //const response = await fetch(process.env.REACT_APP_ESI_API_URL + '/api/v1/nodes/list');
+            //const result = await response.json();
+	    //const sortedResult = [...result];
+	    //sortedResult.sort((a, b) => (a.lease_info[0].start_time > b.lease_info[0].start_time) ? -1 : 1);
+	    const result = [
+		{"lease_info":[{"end_time":"2025-05-15T04:19:41.574483","expire_time":null,"fulfill_time":"2025-05-14T04:19:48.351314","id":"3b5222ba-4fa3-40ab-b2b1-682860c12a76","location":{"cloud":"openstack","project":{"domain_id":null,"domain_name":null,"id":"14e4c3e738674568ad8098dae998fac7","name":null},"region_name":"regionOne","zone":null},"name":null,"node_type":"ironic_node","offer_uuid":"4fd01dd7-6147-4668-b412-b4c75241ed41","owner":"admin","owner_id":"ce54871194264a1dafd508058c0b8614","parent_lease_uuid":null,"project":"uitest","project_id":"14e4c3e738674568ad8098dae998fac7","properties":{},"purpose":null,"resource_class":"fc430","resource_name":"MOC-R4PAC22U33-S1D","resource_properties":{"cpu_arch":"x86_64","cpu_frequency":"3400.0000","cpu_model_name":"Intel(R) Xeon(R) CPU E5-2640 v4 @ 2.40GHz","cpus":"40","local_gb":"185","memory_mb":"131072","vendor":"dell inc"},"resource_uuid":"b277a887-54e9-471d-8a5d-34256a0d4c18","start_time":"2025-05-14T04:19:41.574483","status":"active","timestamp":null,"uuid":"3b5222ba-4fa3-40ab-b2b1-682860c12a76"}],"network_info":[{"fixed_ip":"192.168.77.29","floating_ip":"128.31.20.56","mac_address":"a8:99:69:ae:dd:67","network":"unity-demo","provider_segmentation_id":564},{"mac_address":"a8:99:69:ae:dd:6a"}],"node":{"future_leases":[],"future_offers":[],"id":"b277a887-54e9-471d-8a5d-34256a0d4c18","lease_uuid":"3b5222ba-4fa3-40ab-b2b1-682860c12a76","lessee":"uitest","location":{"cloud":"openstack","project":{"domain_id":null,"domain_name":null,"id":"14e4c3e738674568ad8098dae998fac7","name":null},"region_name":"regionOne","zone":null},"maintenance":"False","name":"MOC-R4PAC22U33-S1D","offer_uuid":"4fd01dd7-6147-4668-b412-b4c75241ed41","owner":"","power_state":"power on","properties":{"cpu_arch":"x86_64","cpu_frequency":"3400.0000","cpu_model_name":"Intel(R) Xeon(R) CPU E5-2640 v4 @ 2.40GHz","cpus":"40","local_gb":"185","memory_mb":"131072","vendor":"dell inc"},"provision_state":"active","resource_class":"fc430","target_power_state":null,"target_provision_state":null,"timestamp":null,"uuid":"b277a887-54e9-471d-8a5d-34256a0d4c18"}}
+	    ]
+            setBareMetalData(result);
             setBareMetalLoading(false);
 	} catch (error) {
             console.error('Error fetching bare metal data:', error);
