@@ -2,9 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Loader from '../Loader';
 
+function DownloadKubeConfig(clusterId) {
+    const request = new XMLHttpRequest();
+    request.open(
+	"GET",
+	process.env.REACT_APP_FULFILLMENT_API_URL + '/api/fulfillment/v1/clusters/' + clusterId + '/kubeconfig',
+	false);
+    request.setRequestHeader("Authorization", "Bearer " + process.env.REACT_APP_FULFILLMENT_API_TOKEN);
+    request.send(null);
+    const element = document.createElement("a");
+    const file = new Blob([request.responseText], {type: "text/plain"});
+    element.href = URL.createObjectURL(file);
+    element.download = "kubeconfig";
+    document.body.appendChild(element);
+    element.click();
+    return;
+}
+
 function ClusterOrderList() {
     const [clusterOrderData, setClusterOrderData] = useState([]);
     const [clusterOrderLoading, setClusterOrderLoading] = useState(true);
+    const [clusterData, setClusterData] = useState([]);
+    const [clusterLoading, setClusterLoading] = useState(true);
     
     useEffect(() => {
 	const fetchClusterOrderData = async () => {
@@ -29,6 +48,30 @@ function ClusterOrderList() {
 	const clusterOrderIntervalId = setInterval(fetchClusterOrderData, 15000);
 	
 	return () => clearInterval(clusterOrderIntervalId)
+    }, []);
+
+    useEffect(() => {
+	const fetchClusterData = async () => {
+	    try {
+		const response = await fetch(process.env.REACT_APP_FULFILLMENT_API_URL + '/api/fulfillment/v1/clusters', {
+		    headers: {
+			Authorization: "Bearer " + process.env.REACT_APP_FULFILLMENT_API_TOKEN,
+		    },
+		});
+		const result = await response.json();
+		const filteredResult = [...result.items.filter(cluster => cluster.metadata.deletionTimestamp === null)];
+		setClusterData(filteredResult);
+		setClusterLoading(false);
+	    } catch (error) {
+		console.error('Error fetching cluster data:', error);
+		setClusterLoading(false);
+	    }
+	};
+
+	fetchClusterData();
+	const clusterIntervalId = setInterval(fetchClusterData, 15000);
+
+	return () => clearInterval(clusterIntervalId)
     }, []);
 
     const [clusterOrderExpanded, setClusterOrderExpanded] = useState([]);
@@ -79,11 +122,27 @@ function ClusterOrderList() {
 			    { (clusterOrderExpanded.includes(clusterOrder.id)) &&
 			      <tr className="subitemrow">
 				  <td></td>
-				  <td className="itemcell" colSpan="2">
-				      CONSOLE URL PLACEHOLDER
-				  </td>
-				  <td className="itemcell" colSpan="2">
-				      KUBECONFIG PLACEHOLDER
+				  <td className="itemcell" colSpan="4">
+				      {clusterLoading ? (
+					  <Loader text="Fetching cluster information" />
+				      ) : (
+					  <table>
+					      <tbody>
+						  <tr>
+						      <td className="subitemcell"><b>Console URL</b></td>
+						      <td className="subitemcell">
+							  <a href={[...clusterData.filter(cluster => cluster.id === clusterOrder.status?.clusterId)][0].status.consoleUrl} target="_blank">
+							      {[...clusterData.filter(cluster => cluster.id === clusterOrder.status?.clusterId)][0].status.consoleUrl}
+							  </a>
+						      </td>
+						  </tr>
+						  <tr>
+						      <td className="subitemcell"><b>Credentials</b></td>
+						      <td className="subitemcell"><button onClick={() => DownloadKubeConfig(clusterOrder.status?.clusterId)}>Download Kubeconfig</button></td>
+						  </tr>
+					      </tbody>
+					  </table>
+				      )}
 				  </td>
 			      </tr>
 			    }
